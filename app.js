@@ -90,10 +90,10 @@ function errorInput(inputAmigo) {
     let invalido = true;
     
     // Conjunto de caracteres invalidos(puntos, numeros, etc.)
-    const regex = /[^a-zA-Z\s]/;
+    const regex = /[0-9!@#$%^&*(),.?":{}|<>]/;
 
     // Aqui se prueba si el input contiene algun caracter diferente a letras
-    if (regex.test(inputAmigo)) {
+    if (!regex.test(inputAmigo)) {
         alert("El nombre solo debe contener letras");
     }
     // Tambien se validará si el nombre tiene menos de 3 letras o ninguna
