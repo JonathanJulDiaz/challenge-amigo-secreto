@@ -112,3 +112,29 @@ function errorInput(inputAmigo) {
 
     return invalido;
 }
+
+/**
+ * Selecciona un nombre aleatorio entre la lista 'amigos' y la muestra en la pagina
+ */
+function sortearAmigo() {
+    // Primero usamos Math.floor() y Math.random() para guardar un numero aleatorio entre 0 y la cantidad de nombres en 'amigos'
+    let indexRandom = Math.floor(Math.random() * amigos.length);
+    
+    // Guardamos la lista HTML donde mostraremos el amigo sorteado en una variable
+    let listaSorteada = document.getElementById("resultado");
+
+    // Guardamos la lista de nombres guardados
+    let lista = document.getElementById("listaAmigos");
+    
+    // Y luego la borramos
+    lista.innerHTML = "";
+
+    // Creamos un nuevo elemento de lista HTML 
+    let amigoSorteado = document.createElement("li");
+
+    // Y le ponemos un texto con el nombre del amigo sorteado
+    amigoSorteado.textContent = "El amigo secreto sorteado es: " + amigos[indexRandom];
+
+    // Finalmente lo ponemos en la lista HTML para mostrarlo en la pagina
+    listaSorteada.appendChild(amigoSorteado);
+}
