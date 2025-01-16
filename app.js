@@ -15,7 +15,7 @@ function agregarAmigo() {
 
     // Aca si el input es lo contrario a invalido, es decir valido, se cumple la condición
     if(!esInputInvalido){
-        guardarNombre(inputAmigo.value);
+        guardarNombreUnico(inputAmigo.value);
     }
 
     // Y se borra el input anterior
@@ -23,15 +23,43 @@ function agregarAmigo() {
 }
 
 /**
- * Se guarda y se muestra el nombre del amigo escrito
+ * Se guarda y se muestra el nombre del amigo escrito si no es un nombre repetido
  * @param {String} input Nombre del amigo
  */
-function guardarNombre(input) {
-    // Se guarda el nombre al final de la lista 'amigos'
-    amigos.push(input);
+function guardarNombreUnico(nombre) {
+    // Si el nombre que se ingresó no esta repetido en la lista de 'amigos', se guarda
+    if(!nombreRepetido(nombre)) {
+        // Se guarda el nombre al final de la lista 'amigos'
+        amigos.push(nombre);
 
-    // Se muestra el nombre debajo del input
-    mostrarAmigos(input);
+        // Se muestra el nombre debajo del input
+        mostrarAmigos(nombre);
+    }
+}
+
+/**
+ * Verifica si el nombre dado esta repetido en la lista 'amigos'
+ * @param {String} nombre Nombre de amigo a verificar su repetición
+ * @returns Devuelve true si esta el nombre repetido en la lista, false en caso contrario
+ */
+function nombreRepetido(nombre) {
+    // Creamos una variable que retornaremos para saber si el nombre esta repetido
+    let repetido = false;
+    
+    // Si hay al menos un nombre en la lista amigos, recorreremos la lista, para compararlo con el String 'nombre'
+    if(amigos.length > 0) {
+        for(let i = 0; i < amigos.length; i++) {
+            if(nombre.toLowerCase() === amigos[i].toLowerCase()) {
+                alert("No se pueden repetir nombres");
+                
+                // Si es igual a otro String en la lista, cambiamos la variable 'repetido' a true y rompemos el ciclo
+                repetido = true;
+                break;
+            }
+        }
+    }
+
+    return repetido;
 }
 
 /**
@@ -41,9 +69,6 @@ function guardarNombre(input) {
 function mostrarAmigos(inputAmigo) {
     // Obtenemos la lista 'ul' que esta debajo del input del HTML
     let lista = document.getElementById("listaAmigos");
-
-    // Limpiamos la lista para que no haya duplicados
-    lista.innerHTML = "";
 
     // Creamos un nuevo elemento 'li'
     let nuevo = document.createElement("li");
@@ -73,7 +98,12 @@ function errorInput(inputAmigo) {
     }
     // Tambien se validará si el nombre tiene menos de 3 letras o ninguna
     else if(inputAmigo.length < 3) {
-        alert("No puede agregar nombres vacios");
+        if (inputAmigo.length == 0) {
+            alert("No puede agregar nombres vacios");
+        }
+        else {
+            alert("Agregue un nombre con al menos 3 letras");
+        }
     }
     else {
         // Si ninguno de los casos anteriores ocurre, entonces el input es un nombre valido
