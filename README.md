@@ -1,6 +1,6 @@
 # Desafío Amigo Secreto
 
-¡Bienvenido al repositorio del desafío Amigo Secreto! Este proyecto demuestra mis conocimientos de JavaScript, HTML y CSS mediante el desarrollo de una aplicación web simple y divertida que ayuda a los usuarios a seleccionar aleatoriamente un amigo secreto.
+¡Bienvenido al repositorio del desafío Amigo Secreto! Este proyecto demuestra mis conocimientos de JavaScript, usando HTML y CSS assets. Mediante el desarrollo de una aplicación web simple y divertida que ayuda a los usuarios a seleccionar aleatoriamente un *amigo secreto*.
 
 ## Descripción del Proyecto
 
@@ -14,9 +14,7 @@ El desafío Amigo Secreto permite a los usuarios ingresar una lista de nombres d
 
 - Selección aleatoria de nombres con un solo clic.
 
-- Diseño responsivo para una experiencia agradable en dispositivos de escritorio y móviles.
-
-## Tecnologías Utilizadas
+## Archivos Bases
 
 * HTML para la estructura de la página web.
 
@@ -41,17 +39,11 @@ Abre el archivo index.html en tu navegador:
 ## Cómo Usar
 
 1. Escribe los nombres de tus amigos en el campo de entrada.
+![Escribir nombre de amigo](assets/readme/1.png)
+2. Haz clic en el botón Añadir para añadir cada nombre a la lista.
+![Agregar amigo](assets/readme/2.png)
 
-2. Haz clic en el botón Agregar Amigo para añadir cada nombre a la lista.
+![Amigos agregados](assets/readme/3.png)
 
-3. Cuando estés listo, haz clic en el botón Elegir Amigo Secreto para seleccionar aleatoriamente un amigo secreto.
-
-
-## Ejemplo
-
-Lista de Amigos:
-- Alicia
-- Roberto
-- Carlos
-
-Al hacer clic en "Elegir Amigo Secreto" podría mostrarse: "¡Tu amigo secreto es: Roberto!"
+4. Cuando estés listo, haz clic en el botón Sortear Amigo para seleccionar aleatoriamente un amigo secreto.
+![Sortear amigo secreto](assets/readme/4.png)
