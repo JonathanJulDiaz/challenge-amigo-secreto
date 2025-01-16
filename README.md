@@ -2,6 +2,9 @@
 
 ¡Bienvenido al repositorio del desafío Amigo Secreto! Este proyecto demuestra mis conocimientos de JavaScript, usando HTML y CSS assets. Mediante el desarrollo de una aplicación web simple y divertida que ayuda a los usuarios a seleccionar aleatoriamente un *amigo secreto*.
 
+## ¿Como puedo acceder a la pagina?
+Puedes clonar este repositorio y entrar a la pagina desde tus archivos locales, o puedes simplemente entrar a este <a href="https://jonathanjuldiaz.github.io/challenge-amigo-secreto/">link</a>, creado por GitHub Pages.
+
 ## Descripción del Proyecto
 
 El desafío Amigo Secreto permite a los usuarios ingresar una lista de nombres de amigos en una página web. Una vez que se ingresan los nombres, un botón activa un proceso de selección aleatoria para determinar quién será el amigo secreto del usuario.
@@ -22,7 +25,7 @@ El desafío Amigo Secreto permite a los usuarios ingresar una lista de nombres d
 
 * JavaScript para la lógica de selección aleatoria y comportamiento dinámico.
 
-## Configuración y Uso
+## ¿Quieres cambiar algo o mejorar la pagina?
 
 Clona este repositorio:
 
@@ -32,9 +35,7 @@ Navega al directorio del proyecto:
 
 `cd desafio-amigo-secreto`
 
-Abre el archivo index.html en tu navegador:
-
-`open index.html`
+Edita el archivo que desees
 
 ## Cómo Usar
 
