@@ -149,3 +149,21 @@ function sortearAmigo() {
         listaSorteada.appendChild(amigoSorteado);
     }
 }
+
+function añadirAmigoConEnter() {
+    // Obtener el input
+    var input = document.getElementById("amigo");
+
+    // Ejecutar una función cuando el usuario presiona una tecla en el teclado
+    input.addEventListener("keypress", function (event) {
+        // Si el usuario presiona la tecla "Enter" en el teclado
+        if (event.key === "Enter") {
+            // Cancelar la acción predeterminada, si es necesario
+            event.preventDefault();
+            // Activar la función del boton al ser presionado
+            agregarAmigo();
+        }
+    });
+}
+
+añadirAmigoConEnter();
