@@ -29,11 +29,11 @@ function agregarAmigo() {
 function guardarNombreUnico(nombre) {
     // Si el nombre que se ingresó no esta repetido en la lista de 'amigos', se guarda
     if (!nombreRepetido(nombre)) {
+        // Se muestra el nombre debajo del input
+        nombre = mostrarAmigos(nombre);
+
         // Se guarda el nombre al final de la lista 'amigos'
         amigos.push(nombre);
-
-        // Se muestra el nombre debajo del input
-        mostrarAmigos(nombre);
     }
 }
 
@@ -64,7 +64,9 @@ function nombreRepetido(nombre) {
 
 /**
  * Muestra los nombres agregados a la lista en el 'ul' del HTML
+ * 
  * @param {String} inputAmigo Nombre del amigo
+ * @returns {String} El nombre del amigo agregado
  */
 function mostrarAmigos(inputAmigo) {
     // Obtenemos la lista 'ul' que esta debajo del input del HTML
@@ -73,11 +75,19 @@ function mostrarAmigos(inputAmigo) {
     // Creamos un nuevo elemento 'li'
     let nuevo = document.createElement("li");
 
+    // Capitalizamos el nombre del amigo
+    let nombre = capitalizarNombre(inputAmigo);
+
     // Ponemos el texto del 'li' como el nombre del amigo agregado
-    nuevo.textContent = inputAmigo;
+    nuevo.textContent = nombre;
+
+    // Le creamos el boton para eliminar
+    botonEliminar(nuevo, lista);
 
     // Y finalmente lo ponemos dentro de la lista 'ul'
     lista.appendChild(nuevo);
+
+    return nombre;
 }
 
 /**
@@ -168,6 +178,96 @@ function añadirAmigoConEnter() {
             agregarAmigo();
         }
     });
+}
+
+/**
+ * Agrega un botón de eliminación a un elemento de lista y configura su funcionalidad.
+ * 
+ * @param {HTMLElement} nuevoElemento - El elemento de lista al que se añadirá el botón de eliminación.
+ * @param {HTMLElement} lista - La lista que contiene el elemento a eliminar.
+ * 
+ * Descripción: El botón de eliminación permite quitar el elemento de la lista visual y 
+ * también eliminar el nombre asociado de la lista de amigos.
+ */
+function botonEliminar(nuevoElemento, lista){
+    nuevoElemento.appendChild(document.createElement("button"));
+
+    console.log(nuevoElemento.children[0]);
+    // Creamos un nuevo 'button'
+    let boton = nuevoElemento.children[0];
+
+    // Configuramos el tamaño del botón
+    // Lo hacemos auto para que el tamaño sea el minimo necesario
+    // para contener el texto "Eliminar"
+    boton.style.width = "auto";
+    boton.style.height = "auto";
+
+    // Añadimos un poco de padding y margen a la izquierda para que el
+    // botón no se vea tan pegado al texto
+    boton.style.padding = "2px";
+    boton.style.marginLeft = "10px";
+
+    // Ponemos el texto del 'button' como 'X'
+    boton.textContent = "Eliminar";
+
+    // Configuramos el color del texto del botón como rojo para
+    // que se vea más visible
+    boton.style.color = "red";
+
+    // Configuramos el fondo del botón como gris claro para que
+    // se vea bien en la lista
+    boton.style.backgroundColor = "#adacac";
+
+    // Configuramos la función que se ejecutará al hacer clic en el botón
+    boton.onclick = function () {
+        // Obtenemos el padre del botón, que es el 'li'
+        let li = this.parentNode;
+
+        // Borramos el nombre del amigo de la lista
+        amigos.pop(amigos.indexOf(li.textContent));
+
+        // Borramos el 'li' de la lista
+        lista.removeChild(li);
+    };
+}
+
+/**
+ * Capitaliza el primer caracter de una cadena y devuelve el resultado.
+ * @param {String} nombre - El nombre a capitalizar.
+ * @returns {String} El nombre con el primer caracter capitalizado.
+ */
+function capitalizarNombre(nombre){
+    let partesNombre = [];
+
+    // Iteramos sobre cada caracter de la cadena y lo vamos a ir guardando en un array
+    for(let i = 0; i < nombre.length; i++){
+        // Si el caracter es un espacio, significa que encontramos el fin de una palabra
+        if(nombre[i] == ' '){
+            // Separamos la cadena en un array de palabras
+            partesNombre = nombre.split(" ");
+            // Iteramos sobre cada palabra del array y la capitalizamos
+            for(let j = 0; j < partesNombre.length; j++){
+                // Tomamos el primer caracter de la palabra y lo convertimos a mayuscula
+                // y lo concatenamos con el resto de la palabra
+                partesNombre[j] = partesNombre[j][0].toUpperCase() + partesNombre[j].slice(1).toLowerCase();
+            }
+            // Unimos la cadena con los espacios en blanco para formar la cadena final
+            nombre = partesNombre.join(" ");
+            // Salimos del bucle
+            break;
+        }
+    }
+
+    return nombre
+}
+
+/**
+ * Se ejecuta cuando el contenido del documento ha sido cargado.
+ * Selecciona automaticamente el input para que el usuario pueda
+ * escribir un nombre y agregarlo sin necesidad de hacer clic en el input.
+ */
+window.onload = function() {
+    let input = document.getElementById("amigo").focus();
 }
 
 añadirAmigoConEnter();
