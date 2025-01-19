@@ -14,7 +14,7 @@ function agregarAmigo() {
     let esInputInvalido = errorInput(inputAmigo.value);
 
     // Aca si el input es lo contrario a invalido, es decir valido, se cumple la condición
-    if(!esInputInvalido){
+    if (!esInputInvalido) {
         guardarNombreUnico(inputAmigo.value);
     }
 
@@ -28,7 +28,7 @@ function agregarAmigo() {
  */
 function guardarNombreUnico(nombre) {
     // Si el nombre que se ingresó no esta repetido en la lista de 'amigos', se guarda
-    if(!nombreRepetido(nombre)) {
+    if (!nombreRepetido(nombre)) {
         // Se guarda el nombre al final de la lista 'amigos'
         amigos.push(nombre);
 
@@ -45,13 +45,13 @@ function guardarNombreUnico(nombre) {
 function nombreRepetido(nombre) {
     // Creamos una variable que retornaremos para saber si el nombre esta repetido
     let repetido = false;
-    
+
     // Si hay al menos un nombre en la lista amigos, recorreremos la lista, para compararlo con el String 'nombre'
-    if(amigos.length > 0) {
-        for(let i = 0; i < amigos.length; i++) {
-            if(nombre.toLowerCase() === amigos[i].toLowerCase()) {
+    if (amigos.length > 0) {
+        for (let i = 0; i < amigos.length; i++) {
+            if (nombre.toLowerCase() === amigos[i].toLowerCase()) {
                 alert("No se pueden repetir nombres");
-                
+
                 // Si es igual a otro String en la lista, cambiamos la variable 'repetido' a true y rompemos el ciclo
                 repetido = true;
                 break;
@@ -88,7 +88,7 @@ function mostrarAmigos(inputAmigo) {
 function errorInput(inputAmigo) {
     // Variable que dirá si el input es invalido
     let invalido = true;
-    
+
     // Conjunto de caracteres invalidos(puntos, numeros, etc.)
     const regex = /^[A-Za-z\u00C0-\u00FF\u0100-\u017F\s]+$/;
 
@@ -97,7 +97,7 @@ function errorInput(inputAmigo) {
         alert("El nombre solo debe contener letras");
     }
     // Tambien se validará si el nombre tiene menos de 3 letras o ninguna
-    else if(inputAmigo.length < 3) {
+    else if (inputAmigo.length < 3) {
         if (inputAmigo.length == 0) {
             alert("No puede agregar nombres vacios");
         }
@@ -117,24 +117,35 @@ function errorInput(inputAmigo) {
  * Selecciona un nombre aleatorio entre la lista 'amigos' y la muestra en la pagina
  */
 function sortearAmigo() {
-    // Primero usamos Math.floor() y Math.random() para guardar un numero aleatorio entre 0 y la cantidad de nombres en 'amigos'
-    let indexRandom = Math.floor(Math.random() * amigos.length);
-    
-    // Guardamos la lista HTML donde mostraremos el amigo sorteado en una variable
-    let listaSorteada = document.getElementById("resultado");
+    if (amigos.length < 2) {
+        alert("Agrega al menos 2 amigos para poder sortear");
+    }
+    else {
+        // Primero usamos Math.floor() y Math.random() para guardar un
+        // numero aleatorio entre 0 y la cantidad de nombres en 'amigos'
+        let indexRandom = Math.floor(Math.random() * amigos.length);
 
-    // Guardamos la lista de nombres guardados
-    let lista = document.getElementById("listaAmigos");
-    
-    // Y luego la borramos
-    lista.innerHTML = "";
+        // Guardamos la lista HTML donde mostraremos el amigo sorteado en una variable
+        let listaSorteada = document.getElementById("resultado");
 
-    // Creamos un nuevo elemento de lista HTML 
-    let amigoSorteado = document.createElement("li");
+        // Guardamos la lista de nombres guardados en una variable
+        let lista = document.getElementById("listaAmigos");
 
-    // Y le ponemos un texto con el nombre del amigo sorteado
-    amigoSorteado.textContent = "El amigo secreto sorteado es: " + amigos[indexRandom];
+        // Guardamos el nombre del amigo sorteado en una variable
+        let nombreAmigoSorteado = amigos[indexRandom];
 
-    // Finalmente lo ponemos en la lista HTML para mostrarlo en la pagina
-    listaSorteada.appendChild(amigoSorteado);
+        // Eliminamos el nombre de la lista HTML y de la lista de 'amigos'
+        lista.removeChild(lista.children[indexRandom]);
+
+        amigos.pop(indexRandom);
+
+        // Creamos un nuevo elemento de lista HTML
+        let amigoSorteado = document.createElement("li");
+
+        // Y le ponemos un texto con el nombre del amigo sorteado
+        amigoSorteado.textContent = "El amigo secreto sorteado es: " + nombreAmigoSorteado;
+
+        // Finalmente lo ponemos en la lista HTML para mostrarlo en la pagina
+        listaSorteada.appendChild(amigoSorteado);
+    }
 }
