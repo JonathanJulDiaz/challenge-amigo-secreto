@@ -150,6 +150,10 @@ function sortearAmigo() {
     }
 }
 
+/**
+ * Agrega la funcionalidad de que al presionar la tecla "Enter" en el input,
+ * se active la función del botón "Añadir" como si se hubiera presionado.
+ */
 function añadirAmigoConEnter() {
     // Obtener el input
     var input = document.getElementById("amigo");
