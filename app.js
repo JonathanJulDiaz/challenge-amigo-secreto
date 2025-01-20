@@ -4,7 +4,7 @@
 let amigos = []; // Lista de amigos
 
 /**
- * Agrega un nombre(String) a la lista 'amigos'
+ * Agrega un nombre a la lista 'amigos'
  */
 function agregarAmigo() {
     // Obtenemos el input del HTML
@@ -99,24 +99,27 @@ function errorInput(inputAmigo) {
     // Variable que dirá si el input es invalido
     let invalido = true;
 
-    // Conjunto de caracteres invalidos(puntos, numeros, etc.)
+    // Conjunto de caracteres validos para el input
     const regex = /^[A-Za-z\u00C0-\u00FF\u0100-\u017F\s]+$/;
-
+    
+    // Si el usuario pone un espacio en blanco al principio o final del input
+    if (inputAmigo[inputAmigo.length - 1] == " " || inputAmigo[0] == " ") {
+        alert("No puede agregar espacios al final o al principio del nombre");
+    }
+    // Por si el usuario ingresa el input vacio
+    else if (inputAmigo.length == 0) {
+        alert("No puede agregar nombres vacios");
+    }
     // Aqui se prueba si el input contiene algun caracter diferente a letras
-    if (!regex.test(inputAmigo)) {
+    else if (!regex.test(inputAmigo)) {
         alert("El nombre solo debe contener letras");
     }
     // Tambien se validará si el nombre tiene menos de 3 letras o ninguna
     else if (inputAmigo.length < 3) {
-        if (inputAmigo.length == 0) {
-            alert("No puede agregar nombres vacios");
-        }
-        else {
-            alert("Agregue un nombre con al menos 3 letras");
-        }
+        alert("Agregue un nombre con al menos 3 letras");
     }
+    // Si ninguno de los casos anteriores ocurre, entonces el input es un nombre valido
     else {
-        // Si ninguno de los casos anteriores ocurre, entonces el input es un nombre valido
         invalido = false;
     }
 
@@ -145,9 +148,14 @@ function sortearAmigo() {
         let nombreAmigoSorteado = amigos[indexRandom];
 
         // Eliminamos el nombre de la lista HTML y de la lista de 'amigos'
+        // y tambien limpiamos la lista de los sorteados
         lista.removeChild(lista.children[indexRandom]);
 
         amigos.pop(indexRandom);
+
+        if (listaSorteada.childElementCount > 0) {
+            listaSorteada.removeChild(listaSorteada.children[0]);
+        }
 
         // Creamos un nuevo elemento de lista HTML
         let amigoSorteado = document.createElement("li");
@@ -189,10 +197,9 @@ function añadirAmigoConEnter() {
  * Descripción: El botón de eliminación permite quitar el elemento de la lista visual y 
  * también eliminar el nombre asociado de la lista de amigos.
  */
-function botonEliminar(nuevoElemento, lista){
+function botonEliminar(nuevoElemento, lista) {
     nuevoElemento.appendChild(document.createElement("button"));
 
-    console.log(nuevoElemento.children[0]);
     // Creamos un nuevo 'button'
     let boton = nuevoElemento.children[0];
 
@@ -236,29 +243,22 @@ function botonEliminar(nuevoElemento, lista){
  * @param {String} nombre - El nombre a capitalizar.
  * @returns {String} El nombre con el primer caracter capitalizado.
  */
-function capitalizarNombre(nombre){
-    let partesNombre = [];
-
-    // Iteramos sobre cada caracter de la cadena y lo vamos a ir guardando en un array
-    for(let i = 0; i < nombre.length; i++){
-        // Si el caracter es un espacio, significa que encontramos el fin de una palabra
-        if(nombre[i] == ' '){
-            // Separamos la cadena en un array de palabras
-            partesNombre = nombre.split(" ");
-            // Iteramos sobre cada palabra del array y la capitalizamos
-            for(let j = 0; j < partesNombre.length; j++){
-                // Tomamos el primer caracter de la palabra y lo convertimos a mayuscula
-                // y lo concatenamos con el resto de la palabra
-                partesNombre[j] = partesNombre[j][0].toUpperCase() + partesNombre[j].slice(1).toLowerCase();
-            }
-            // Unimos la cadena con los espacios en blanco para formar la cadena final
-            nombre = partesNombre.join(" ");
-            // Salimos del bucle
-            break;
-        }
+function capitalizarNombre(nombre) {
+    let partesNombre = nombre.split(" ");
+    
+    // Iteramos sobre cada palabra del array y la capitalizamos
+    for (let i = 0; i < partesNombre.length; i++) {
+        // Tomamos el primer caracter de la palabra y lo convertimos a mayuscula
+        // y lo concatenamos con el resto de la palabra
+        primeraLetra = partesNombre[i][0].toUpperCase();
+        restoPalabra = partesNombre[i].slice(1).toLowerCase();
+        partesNombre[i] = primeraLetra + restoPalabra;
     }
 
-    return nombre
+    // Unimos la cadena con los espacios en blanco para formar la cadena final
+    nombre = partesNombre.join(" ");
+
+    return nombre;
 }
 
 /**
@@ -266,7 +266,7 @@ function capitalizarNombre(nombre){
  * Selecciona automaticamente el input para que el usuario pueda
  * escribir un nombre y agregarlo sin necesidad de hacer clic en el input.
  */
-window.onload = function() {
+window.onload = function () {
     let input = document.getElementById("amigo").focus();
 }
 
