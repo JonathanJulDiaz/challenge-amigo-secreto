@@ -165,7 +165,7 @@ function sortearAmigo() {
         let amigoSorteado = document.createElement("li");
 
         // Y le ponemos un texto con el nombre del amigo sorteado
-        amigoSorteado.textContent = "El amigo secreto sorteado es: " + nombreAmigoSorteado;
+        amigoSorteado.textContent = `El amigo secreto sorteado es: ${nombreAmigoSorteado}`;
 
         // Finalmente lo ponemos en la lista HTML para mostrarlo en la pagina
         listaSorteada.appendChild(amigoSorteado);
