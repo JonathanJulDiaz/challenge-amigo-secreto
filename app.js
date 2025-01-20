@@ -1,7 +1,8 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de
 // programación. Aquí deberás desarrollar la lógica para resolver el problema.
 
-let amigos = []; // Lista de amigos
+// Lista de amigos
+let amigos = [];
 
 /**
  * Agrega un nombre a la lista 'amigos'
@@ -13,7 +14,7 @@ function agregarAmigo() {
     // Se comprueba si el input es invalido
     let esInputInvalido = errorInput(inputAmigo.value);
 
-    // Aca si el input es lo contrario a invalido, es decir valido, se cumple la condición
+    // Aca si el input es lo contrario a invalido, es decir, valido, se cumple la condición
     if (!esInputInvalido) {
         guardarNombreUnico(inputAmigo.value);
     }
@@ -46,13 +47,15 @@ function nombreRepetido(nombre) {
     // Creamos una variable que retornaremos para saber si el nombre esta repetido
     let repetido = false;
 
-    // Si hay al menos un nombre en la lista amigos, recorreremos la lista, para compararlo con el String 'nombre'
+    // Si hay al menos un nombre en la lista amigos, recorreremos la
+    // lista, para compararlo con el String 'nombre'
     if (amigos.length > 0) {
         for (let i = 0; i < amigos.length; i++) {
             if (nombre.toLowerCase() === amigos[i].toLowerCase()) {
                 alert("No se pueden repetir nombres");
 
-                // Si es igual a otro String en la lista, cambiamos la variable 'repetido' a true y rompemos el ciclo
+                // Si es igual a otro String en la lista, cambiamos la
+                // variable 'repetido' a true y rompemos el ciclo
                 repetido = true;
                 break;
             }
@@ -153,6 +156,7 @@ function sortearAmigo() {
 
         amigos.pop(indexRandom);
 
+        // Si se mostró un amigo sorteado antes, borrarlo
         if (listaSorteada.childElementCount > 0) {
             listaSorteada.removeChild(listaSorteada.children[0]);
         }
