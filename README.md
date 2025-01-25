@@ -14,6 +14,8 @@ El juego del Amigo Secreto permite a los usuarios ingresar una lista de nombres 
 
 - Visualización dinámica de la lista de amigos.
 
+- Eliminación de amigos sencilla
+
 - Selección aleatoria de nombres con un solo clic.
 
 ## Archivos Bases
